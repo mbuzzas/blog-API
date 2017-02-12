@@ -53,8 +53,49 @@ describe('Blog API', function() {
   		});
   });
 
+  it('should update blog posts on PUT', function() {
+  	const updatePost = {
+  		title: 'foo',
+  		content: 'lorem ipsum dolor sit amet',
+  		author: 'bizz'
+  	};
+  	return chai.request(app)
+  		.get('/blog-posts')
+  		.then(function(res) {
+  			updatePost.id = res.body[0].id;
+  			return chai.request(app)
+  				.put(`/blog-posts/${updatePost.id}`)
+  				.send(updatePost)
+  		})
+  		.then(function(res) {
+  			res.should.have.status(200);
+  			res.should.be.json;
+  			res.body.should.be.a('object');
+  			res.body.should.deep.equal(updatePost);
+  		});
+  });
+
   
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
