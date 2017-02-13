@@ -87,7 +87,7 @@ describe('Blog API', function() {
   		});
   });
 
-})
+});
 
 
 
